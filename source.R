@@ -221,14 +221,14 @@ global_plants_mw<- inner_join(x2, y2, by = "country")
 rgn_tbl_fn <- function(rgn){
   if(rgn == "Whole World"){
     
-    rgn_tbl <- global_plants_mw %>% group_by(country_long) %>% summarise(mw = round(sum(capacity_mw))) %>% arrange(desc(mw)) %>% mutate(Percentage = round(mw*100/sum(mw), 1), cum_per = cumsum(Percentage))
+    rgn_tbl <- global_plants_mw %>% group_by(country_long) %>% summarise(mw = round(sum(capacity_mw))) %>% arrange(desc(mw)) %>% mutate(Percentage = round(mw*100/sum(mw), 2), cum_per = cumsum(Percentage))
     
     names(rgn_tbl) <- c("Country", "Installed capacity (MW)", "% Global capacity", "Cummulative %")
     
     rgn_tbl
     
   }else {
-    rgn_tbl <- global_plants_mw  %>% filter(region == rgn) %>% group_by(country_long) %>% summarise(mw = round(sum(capacity_mw))) %>% arrange(desc(mw)) %>% mutate(Percentage = round(mw*100/sum(mw), 1), cum_per = cumsum(Percentage))
+    rgn_tbl <- global_plants_mw  %>% filter(region == rgn) %>% group_by(country_long) %>% summarise(mw = round(sum(capacity_mw))) %>% arrange(desc(mw)) %>% mutate(Percentage = round(mw*100/sum(mw), 2), cum_per = cumsum(Percentage))
     
     names(rgn_tbl) <- c("Country", "Installed capacity (MW)", paste0("% in ", rgn), "Cummulative %")
     
